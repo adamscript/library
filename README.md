@@ -1,0 +1,1 @@
+I made this project to learn about Javascript Object and Constructor.
