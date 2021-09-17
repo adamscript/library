@@ -1,17 +1,20 @@
 let myLibrary = [
     {
         id: 176432837,
-        title: 'The Hobbit'
+        title: 'The Hobbit',
+        read: false
     },
     {
         id: 329874329,
-        title: 'Lord of the Rings'
+        title: 'Lord of the Rings',
+        read: false
     }
 ];
 
-function Book(id, title){
+function Book(id, title, read){
     this.id = id;
     this.title = title;
+    this.read = read;
 }
 
 function addBookToLibrary(){
@@ -38,9 +41,30 @@ function updateBookList(){
         bookDiv.appendChild(bookTitle);
         bookTitle.innerHTML = "Title : " + myLibrary[i].title;
 
+        const bookStatusLabel = document.createElement("label");
+        bookStatusLabel.setAttribute("for", "bookStatus");
+        bookDiv.appendChild(bookStatusLabel);
+        bookStatusLabel.innerHTML = "Read";
+
+        const bookStatus = document.createElement("input");
+        bookStatus.setAttribute("type", "checkbox");
+        bookStatus.id = "bookStatus";
+        bookStatus.checked = myLibrary[i].read;
+        bookDiv.appendChild(bookStatus);
+        bookStatus.addEventListener('change', () => {
+            if(bookStatus.checked){
+                myLibrary[i].read = true;
+                updateBookList();
+            }
+            else{
+                myLibrary[i].read = false;
+                updateBookList();
+            }
+        });
+
         const bookDelete = document.createElement("button");
         bookDiv.appendChild(bookDelete);
-        bookDelete.innerHTML = "Delete Book"
+        bookDelete.innerHTML = "Delete Book";
         bookDelete.addEventListener("click", () => {
             myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
             updateBookList();
