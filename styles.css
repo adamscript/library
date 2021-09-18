@@ -1,8 +1,111 @@
-.bookDiv {
-    color: white;
-    background-color: grey;
+html{
+    color: #aaaaaa;
+    background-color: #212121;
+    font-family: 'Roboto', sans-serif;
+}
+
+input{
+    color: #ffffff;
+    background-color: #303030;
+    
+    height: 30px;
+    font-size: 15px;
+
+    border: white;
+    border-radius: 5px;
+}
+
+input:focus{
+    background-color: #181818;
+    outline: 0;
+}
+
+#bookSearchList{
+    position: absolute;
+    top: 30px;
+
+    width: 480px;
+    height: 360px;
+    overflow: auto;
+    z-index: 2;
+
+    background-color: #181818;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+#bookSearchList::-webkit-scrollbar-track{
+    background-color: #181818;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #3d3d3d;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-track{
+    background-color: #212121;
+}
+
+.bookSearchResult{
+    display: flex;
+    flex-direction: row;
 }
 
 .bookSearchResult:hover {
-    background-color: grey;
+    background-color: #3d3d3d;
+}
+
+#bookSearchResultText{
+    width: 360px;
+    height: 100px;
+}
+
+#bookSearchResultTitle {
+    color: white;
+}
+
+#bookSearchResultAuthor {
+    font-size: small;
+}
+
+#bookSearchResultFrame{
+    margin: auto;
+    
+    width: 80px;
+    height: 80px;
+}
+
+#bookSearchResultImage {
+
+    max-width: 80px;
+    max-height: 80px;
+}
+
+#bookForm {
+    display: grid;
+    position: relative;
+
+    width: 480px;
+    row-gap: 10px;
+}
+
+#newBook {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+#coverimg {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+#coverimgprev {
+    width: 300px;
+}
+
+img{
+    filter: drop-shadow(0 0 0.75rem #050505);
 }

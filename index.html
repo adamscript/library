@@ -3,19 +3,35 @@
     <head>
         <title>Library</title>
         <link rel="stylesheet" href="styles.css">
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
     </head>
     <body>
         <h1>Library</h1>
-        <div id="bookForm">
-            <label for="ftitle">Title : </label>
-            <input type="text" id="ftitle" name="ftitle" onchange="searchBook()">
-            <br>
-            <label for="fauthor">Author : </label>
-            <input type="text" id="fauthor" name="fauthor">
-            <br>
-            <button onclick="addBookToLibrary()">Add Book</button>
+        <div id="newBook">
+            <div id="coverimgprev">
+                <img id="coverimg">
+                <input type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
+            </div>
+            <div id="bookForm">
+                <input type="text" id="ftitle" name="ftitle" placeholder="Title" onchange="searchBook()" oninput="searchBook()" onfocus="showSearchBook()" onblur="hideSearchBook()">
+                <div id="bookSearchList" hidden></div>
+                <br>
+                <input type="text" id="fauthor" name="fauthor" placeholder="Author">
+                <input type="text" id="fpublished" name="fpublished" placeholder="Published">
+                <input type="text" id="fpublisher" name="fpublisher" placeholder="Publisher">
+                <input type="text" id="flanguage" name="flanguage" placeholder="Language">
+                <input type="text" id="fcategories" name="fcategories" placeholder="Categories">
+                <input type="number" id="fpages" name="fpages" placeholder="Page Count">
+                <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
+                <br>
+                <textarea id="fdescription" name="fdescription" placeholder="Description" rows="10"></textarea>
+                <br>
+                <button onclick="addBookToLibrary()">Add Book</button>
+            </div>
         </div>
-        <div id="bookSearchList"></div>
         <div id="bookList"></div>
     </body>
 </html>
