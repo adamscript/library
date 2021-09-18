@@ -1,27 +1,32 @@
 let myLibrary = [
     {
-        id: 176432837,
+        id: 'd2656ddb-7bbd-47a6-9278-19f017bc3be7',
         title: 'The Hobbit',
+        author: 'J.R.R. Tolkien',
         read: false
     },
     {
-        id: 329874329,
+        id: '729f7fb8-4472-4c8c-ae64-f09ed8de44d0',
         title: 'Lord of the Rings',
+        author: 'J.R.R. Tolkien',
         read: false
     }
 ];
 
-function Book(id, title, read){
+function Book(id, title, author, read){
     this.id = id;
     this.title = title;
+    this.author = author;
     this.read = read;
 }
 
 function addBookToLibrary(){
     let bookID = uuid();
     let bookTitle = document.getElementById('ftitle').value;
+    let bookAuthor = document.getElementById('fauthor').value;
+    let bookStatus = false;
 
-    myLibrary.push(new Book(bookID, bookTitle));
+    myLibrary.push(new Book(bookID, bookTitle, bookAuthor, bookStatus));
     updateBookList();
 }
 
@@ -40,6 +45,10 @@ function updateBookList(){
         const bookTitle = document.createElement("p");
         bookDiv.appendChild(bookTitle);
         bookTitle.innerHTML = "Title : " + myLibrary[i].title;
+
+        const bookAuthor = document.createElement("p");
+        bookDiv.appendChild(bookAuthor);
+        bookAuthor.innerHTML = "Author : " + myLibrary[i].author;
 
         const bookStatusLabel = document.createElement("label");
         bookStatusLabel.setAttribute("for", "bookStatus");
@@ -90,3 +99,4 @@ function uuid() {
 
      return uuid;  
 }
+

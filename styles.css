@@ -2,3 +2,7 @@
     color: white;
     background-color: grey;
 }
+
+.bookSearchResult:hover {
+    background-color: grey;
+}

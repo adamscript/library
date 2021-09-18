@@ -6,8 +6,16 @@
     </head>
     <body>
         <h1>Library</h1>
-        <input type="text" id="ftitle" name="ftitle">
-        <button onclick="addBookToLibrary()">Add Book</button>
+        <div id="bookForm">
+            <label for="ftitle">Title : </label>
+            <input type="text" id="ftitle" name="ftitle" onchange="searchBook()">
+            <br>
+            <label for="fauthor">Author : </label>
+            <input type="text" id="fauthor" name="fauthor">
+            <br>
+            <button onclick="addBookToLibrary()">Add Book</button>
+        </div>
+        <div id="bookSearchList"></div>
         <div id="bookList"></div>
     </body>
 </html>
