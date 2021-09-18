@@ -1,17 +1,12 @@
-let myLibrary = [
-    {
-        id: 'd2656ddb-7bbd-47a6-9278-19f017bc3be7',
-        title: 'The Hobbit',
-        author: 'J.R.R. Tolkien',
-        read: false
-    },
-    {
-        id: '729f7fb8-4472-4c8c-ae64-f09ed8de44d0',
-        title: 'Lord of the Rings',
-        author: 'J.R.R. Tolkien',
-        read: false
-    }
-];
+let myLibrary = [];
+
+function setLibraryItem(){
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function getLibraryItem(){
+    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+}
 
 function Book(id, title, author, read){
     this.id = id;
@@ -27,10 +22,13 @@ function addBookToLibrary(){
     let bookStatus = false;
 
     myLibrary.push(new Book(bookID, bookTitle, bookAuthor, bookStatus));
+    setLibraryItem()
     updateBookList();
 }
 
 function updateBookList(){
+    getLibraryItem()
+
     //Clear book list DOM
     while (document.querySelector('#bookList').firstChild){
         document.querySelector('#bookList').removeChild(document.querySelector('#bookList').firstChild)
@@ -63,10 +61,12 @@ function updateBookList(){
         bookStatus.addEventListener('change', () => {
             if(bookStatus.checked){
                 myLibrary[i].read = true;
+                setLibraryItem()
                 updateBookList();
             }
             else{
                 myLibrary[i].read = false;
+                setLibraryItem()
                 updateBookList();
             }
         });
@@ -76,12 +76,11 @@ function updateBookList(){
         bookDelete.innerHTML = "Delete Book";
         bookDelete.addEventListener("click", () => {
             myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
+            setLibraryItem()
             updateBookList();
         })
     }    
 }
-
-updateBookList();
 
 //Generate UUID for book identification
 function uuid() {    
@@ -100,3 +99,7 @@ function uuid() {
      return uuid;  
 }
 
+
+
+getLibraryItem();
+updateBookList();
