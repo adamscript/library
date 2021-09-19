@@ -4,35 +4,44 @@
         <title>Library</title>
         <link rel="stylesheet" href="styles.css">
 
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
     </head>
     <body>
         <h1>Library</h1>
-        <div id="newBook">
-            <div id="coverimgprev">
-                <img id="coverimg">
-                <input type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
+        <div id="newBookWindow" hidden>
+            <div id="newBookFrame">
+                <div id="newBook">
+                    <div id="coverimgprev">
+                        <img id="coverimg">
+                    </div>
+                    <div id="bookForm">
+                        <input type="text" id="ftitle" name="ftitle" placeholder="Title" onchange="searchBook()" oninput="searchBook()" onfocus="showSearchBook()" onblur="hideSearchBook()">
+                        <div id="bookSearchList" hidden></div>
+                        <br>
+                        <input type="text" id="fauthor" name="fauthor" placeholder="Author">
+                        <input type="text" id="fpublished" name="fpublished" placeholder="Published">
+                        <input type="text" id="fpublisher" name="fpublisher" placeholder="Publisher">
+                        <input type="text" id="flanguage" name="flanguage" placeholder="Language">
+                        <input type="text" id="fcategories" name="fcategories" placeholder="Categories">
+                        <input type="number" id="fpages" name="fpages" placeholder="Page Count">
+                        <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
+                        <br>
+                        <input type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
+                        <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="500"></textarea>
+                        <br>
+                        <button id="addBookBtn" onclick="addBookToLibrary()">Add Book</button>
+                    </div>
+                </div>
             </div>
-            <div id="bookForm">
-                <input type="text" id="ftitle" name="ftitle" placeholder="Title" onchange="searchBook()" oninput="searchBook()" onfocus="showSearchBook()" onblur="hideSearchBook()">
-                <div id="bookSearchList" hidden></div>
-                <br>
-                <input type="text" id="fauthor" name="fauthor" placeholder="Author">
-                <input type="text" id="fpublished" name="fpublished" placeholder="Published">
-                <input type="text" id="fpublisher" name="fpublisher" placeholder="Publisher">
-                <input type="text" id="flanguage" name="flanguage" placeholder="Language">
-                <input type="text" id="fcategories" name="fcategories" placeholder="Categories">
-                <input type="number" id="fpages" name="fpages" placeholder="Page Count">
-                <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
-                <br>
-                <textarea id="fdescription" name="fdescription" placeholder="Description" rows="10"></textarea>
-                <br>
-                <button onclick="addBookToLibrary()">Add Book</button>
-            </div>
+            <div id="newBookBg" onclick="hideNewBook()"></div>
         </div>
         <div id="bookList"></div>
+        <div id="bookListDetail" hidden></div>
+        <button id="newBookBtn" onclick="showNewBook()">add</button>
     </body>
 </html>
 <script src="scripts.js"></script>

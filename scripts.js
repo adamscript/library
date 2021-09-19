@@ -38,96 +38,157 @@ function addBookToLibrary(){
     let bookStatus = false;
 
     myLibrary.push(new Book(bookID, bookTitle, bookAuthor, bookPublished, bookPublisher, bookLanguage, bookCategories, bookPages, bookDescription, bookISBN, bookCover, bookStatus));
+    document.getElementById('newBookWindow').hidden = true;
     setLibraryItem()
     updateBookList();
+    updateBookListDetail();
 }
 
 function updateBookList(){
-    getLibraryItem()
-
-    //Clear book list DOM
     while (document.querySelector('#bookList').firstChild){
         document.querySelector('#bookList').removeChild(document.querySelector('#bookList').firstChild)
     }
 
     //Draw book list
     for (let i = 0; i < myLibrary.length; i++){
-        const bookDiv = document.createElement("div");
-        bookDiv.className = "bookDiv"
-        document.getElementById("bookList").appendChild(bookDiv);
-
-        const bookTitle = document.createElement("p");
-        bookDiv.appendChild(bookTitle);
-        bookTitle.innerHTML = myLibrary[i].title;
-
-        const bookAuthor = document.createElement("p");
-        bookDiv.appendChild(bookAuthor);
-        bookAuthor.innerHTML = "Author : " + myLibrary[i].author;
-
-        const bookPublished = document.createElement("p");
-        bookDiv.appendChild(bookPublished);
-        bookPublished.innerHTML = "Published : " + myLibrary[i].published;
-
-        const bookPublisher = document.createElement("p");
-        bookDiv.appendChild(bookPublisher);
-        bookPublisher.innerHTML = "Publisher : " + myLibrary[i].publisher;
-
-        const bookLanguage = document.createElement("p");
-        bookDiv.appendChild(bookLanguage);
-        bookLanguage.innerHTML = "Language : " + myLibrary[i].language;
-
-        const bookCategories = document.createElement("p");
-        bookDiv.appendChild(bookCategories);
-        bookCategories.innerHTML = "Categories : " + myLibrary[i].categories;
-
-        const bookPages = document.createElement("p");
-        bookDiv.appendChild(bookPages);
-        bookPages.innerHTML = "Page count : " + myLibrary[i].pages;
-
-        const bookDescription = document.createElement("p");
-        bookDiv.appendChild(bookDescription);
-        bookDescription.innerHTML = "Description : " + myLibrary[i].description;
-
-        const bookISBN = document.createElement("p");
-        bookDiv.appendChild(bookISBN);
-        bookISBN.innerHTML = "ISBN : " + myLibrary[i].isbn;
-
+        const bookCoverFrame = document.createElement("div");
+        bookCoverFrame.className = "bookCoverFrame";
+        document.getElementById("bookList").appendChild(bookCoverFrame);
+        
         const bookCover = document.createElement("img");
-        bookDiv.appendChild(bookCover);
+        bookCoverFrame.appendChild(bookCover);
         bookCover.src = myLibrary[i].cover;
 
-        const bookStatusLabel = document.createElement("label");
-        bookStatusLabel.setAttribute("for", "bookStatus");
-        bookDiv.appendChild(bookStatusLabel);
-        bookStatusLabel.innerHTML = "Read";
+        const bookCoverStatusFrame = document.createElement("div");
+        bookCoverStatusFrame.className = "bookCoverStatusFrame";
+        bookCoverStatusFrame.id = i + "bookStatus"
+        bookCoverStatusFrame.hidden = false;
+        bookCoverStatusFrame.innerHTML = "bookmark";
+        bookCoverFrame.appendChild(bookCoverStatusFrame);
 
-        const bookStatus = document.createElement("input");
-        bookStatus.setAttribute("type", "checkbox");
-        bookStatus.id = "bookStatus";
-        bookStatus.checked = myLibrary[i].read;
-        bookDiv.appendChild(bookStatus);
-        bookStatus.addEventListener('change', () => {
-            if(bookStatus.checked){
-                myLibrary[i].read = true;
-                setLibraryItem()
+        const bookCoverButtonFrame = document.createElement("div");
+        bookCoverButtonFrame.className = "bookCoverButtonFrame";
+        bookCoverButtonFrame.hidden = true;
+        bookCoverFrame.appendChild(bookCoverButtonFrame);
+
+        const bookCoverButton = document.createElement("div");
+        bookCoverButton.className = "bookCoverButton";
+        bookCoverButtonFrame.appendChild(bookCoverButton);
+
+        const bookDelete = document.createElement("button");
+        bookDelete.className = "bookDelete";
+        bookDelete.innerHTML = "delete";
+        bookCoverButton.appendChild(bookDelete);
+        bookDelete.addEventListener("click", () => {
+            myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
+            document.getElementById('bookListDetail').hidden = true;
+            setLibraryItem()
+            updateBookList();
+            updateBookListDetail();
+        })   
+
+        const bookStatus = document.createElement("button");
+        bookStatus.className = "bookStatus";
+        bookStatus.innerHTML = "bookmark_border";
+        bookCoverButton.appendChild(bookStatus);
+        bookStatus.addEventListener('mousedown', () => {
+            if(myLibrary[i].read){
+                myLibrary[i].read = false;
+
+                document.getElementById(i + "bookStatus").hidden = true;
+                setLibraryItem();
                 updateBookList();
+                updateBookListDetail(i);
+
+                console.log(i + "bookStatus false")
             }
             else{
-                myLibrary[i].read = false;
+                myLibrary[i].read = true;
+
+                document.getElementById(i + "bookStatus").hidden = false;
                 setLibraryItem()
                 updateBookList();
+                updateBookListDetail(i);
+
+                console.log(i + "bookStatus true")
             }
         });
 
-        const bookDelete = document.createElement("button");
-        bookDiv.appendChild(bookDelete);
-        bookDelete.innerHTML = "Delete Book";
-        bookDelete.addEventListener("click", () => {
-            myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
-            setLibraryItem()
-            updateBookList();
-        })
-    }    
+        const bookCoverButtonBg = document.createElement("div");
+        bookCoverButtonBg.className = "bookCoverButtonBg";
+        bookCoverButtonFrame.appendChild(bookCoverButtonBg);
+
+        bookCoverFrame.addEventListener("mouseover", () => {
+            updateBookListDetail(i);
+            document.getElementById("bookListDetail").hidden = false;
+            bookCoverButtonFrame.hidden = false;
+        });
+
+        bookCoverFrame.addEventListener("mouseout", () => {
+            document.getElementById("bookListDetail").hidden = true;
+            bookCoverButtonFrame.hidden = true;
+        });
+    }   
+}
+
+function updateBookListDetail(selectedBook){
+    getLibraryItem()
+
+    //Clear book list DOM
+
+    while (document.querySelector('#bookListDetail').firstChild){
+        document.querySelector('#bookListDetail').removeChild(document.querySelector('#bookListDetail').firstChild)
+    }
+
+    //Draw book list
+    const bookDiv = document.createElement("div");
+    bookDiv.className = "bookDiv"
+    document.getElementById("bookListDetail").appendChild(bookDiv);
+
+    const bookTitle = document.createElement("p");
+    bookTitle.className = "bookListDetailTitle";
+    bookDiv.appendChild(bookTitle);
+    bookTitle.innerHTML = myLibrary[selectedBook].title;
+
+    const bookAuthor = document.createElement("p");
+    bookAuthor.className = "bookListDetails";
+    bookDiv.appendChild(bookAuthor);
+    bookAuthor.innerHTML = "Author : " + myLibrary[selectedBook].author;
+
+    const bookPublished = document.createElement("p");
+    bookPublished.className = "bookListDetails";
+    bookDiv.appendChild(bookPublished);
+    bookPublished.innerHTML = "Published : " + myLibrary[selectedBook].published;
+
+    const bookPublisher = document.createElement("p");
+    bookPublisher.className = "bookListDetails";
+    bookDiv.appendChild(bookPublisher);
+    bookPublisher.innerHTML = "Publisher : " + myLibrary[selectedBook].publisher;
+
+    const bookLanguage = document.createElement("p");
+    bookLanguage.className = "bookListDetails";
+    bookDiv.appendChild(bookLanguage);
+    bookLanguage.innerHTML = "Language : " + myLibrary[selectedBook].language;
+
+    const bookCategories = document.createElement("p");
+    bookCategories.className = "bookListDetails";
+    bookDiv.appendChild(bookCategories);
+    bookCategories.innerHTML = "Categories : " + myLibrary[selectedBook].categories;
+
+    const bookPages = document.createElement("p");
+    bookPages.className = "bookListDetails";
+    bookDiv.appendChild(bookPages);
+    bookPages.innerHTML = "Page count : " + myLibrary[selectedBook].pages;
+
+    const bookDescription = document.createElement("p");
+    bookDescription.className = "bookListDetailDesc";
+    bookDiv.appendChild(bookDescription);
+    bookDescription.innerHTML = myLibrary[selectedBook].description;
+
+    const bookISBN = document.createElement("p");
+    bookISBN.className = "bookListDetails";
+    bookDiv.appendChild(bookISBN);
+    bookISBN.innerHTML = "ISBN : " + myLibrary[selectedBook].isbn; 
 }
 
 //Generate UUID for book identification
@@ -215,6 +276,20 @@ function updateCover(){
     document.getElementById('coverimg').src = document.getElementById('fcover').value;
     console.log("cover updated!");
 }
+
+function showNewBook(){
+    document.getElementById('newBookWindow').hidden = false;
+}
+
+function hideNewBook(){
+    document.getElementById('newBookWindow').hidden = true;
+}
+
+window.addEventListener("mousemove", function(e){
+    let bookListDetail = document.getElementById('bookListDetail');
+    bookListDetail.style.left = (e.pageX + 15) + "px";
+    bookListDetail.style.top = (e.pageY + 15) + "px";
+});
 
 getLibraryItem();
 updateBookList();
