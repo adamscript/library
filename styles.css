@@ -43,13 +43,13 @@ textarea:focus{
     color: #181818;
     background-color: rgb(192, 179, 106);
 
-    height: 30px;
-    width: 50%;
+    height: 40px;
+    width: 35%;
 
     margin: auto;
 
     border: 0;
-    border-radius: 15px;
+    border-radius: 20px;
 }
 
 #addBookBtn:hover{
@@ -111,6 +111,8 @@ textarea:focus{
     min-width: 128px;
 
     border-radius: 1.5px;
+
+    filter: drop-shadow(5px 15px 0.65rem rgba(0, 0, 0, 0.45));
 }
 
 .bookCoverOverlay{
@@ -265,28 +267,68 @@ textarea:focus{
 }
 
 #bookForm {
-    display: grid;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 
-    margin: 30px;
+    margin: 30px 30px 30px 15px;
 
     width: 300px;
     row-gap: 10px;
 }
 
 #newBook {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
+    display: flex;
+    flex-direction: row;
+}
 
-    background-color: #212121;
+#closeBtnFrame{
+    display: flex;
+    flex-direction: row-reverse;
 
-    border-radius: 5px;
+    border-bottom: 1px solid #3d3d3d;
+
+    padding: 5px;
+}
+
+#closeBtn{
+    font-family: 'Material Icons';
+    font-size: 30px;
+
+    width: 50px;
+    height: 50px;
+
+    border: 0;
+    border-radius: 50%;
+
+    background: 0;
+    color:rgb(214, 201, 123);
+}
+
+#closeBtn:hover{
+    background: rgba(255,255,255,0.15);
 }
 
 #newBookFrame{
-    position: absolute;
+    display: flex;
+    justify-content: center;
+}
 
-    z-index: 3;
+#newBookWindow{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+}
+
+#newBookPanel{
+    background-color: #212121;
+    border-radius: 5px;
+
+    margin: 30px;
+
+    z-index: 4;
 }
 
 #newBookBg{
@@ -300,30 +342,21 @@ textarea:focus{
     background-color: rgba(0,0,0,0.5);
     backdrop-filter: blur(1px);
 
-    z-index: 2;
+    z-index: 3;
 }
 
 #coverimg {
-    max-width: 225px;
-    max-height: 225px;
 
-    min-width: 128px;
-    min-height: 128px;
+    max-width: 150px;
 
-    position: absolute;
-    right: 0;
-
-    margin: 30px 30px 0 30px;
+    min-width: 120px;
+    min-height: 120px;
 }
 
 #coverimgprev {
-    position: relative;
+    margin: 30px 15px 0 30px;
 
-    width: 225px;
-}
-
-img{
-    filter: drop-shadow(5px 15px 0.65rem rgba(0, 0, 0, 0.45));
+    width: 150px;
 }
 
 .bookCoverStatusFrame{
@@ -347,20 +380,10 @@ img{
     color: #212121;
     background-color: rgb(214, 201, 123);
 
-    filter: drop-shadow(5px 10px 0.3rem rgba(0,0,0,0.15));
+    filter: drop-shadow(0 0 0.5rem rgba(0,0,0,0.5));
 }
 
 #newBookBtn:hover{
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-
-    width: 60px;
-    height: 60px;
-
-    border: 0;
-    border-radius: 50%;
-
     color: #181818;
     background-color: rgb(170, 160, 102);
 }
