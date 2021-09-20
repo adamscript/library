@@ -43,13 +43,13 @@ textarea:focus{
     color: #181818;
     background-color: rgb(192, 179, 106);
 
-    height: 40px;
+    height: 35px;
     width: 35%;
 
     margin: auto;
 
     border: 0;
-    border-radius: 20px;
+    border-radius: 17px;
 }
 
 #addBookBtn:hover{
@@ -201,14 +201,15 @@ textarea:focus{
 
 #bookSearchList{
     position: absolute;
-    top: 30px;
+    top: 135px;
 
     width: 300px;
-    height: 180px;
+    height: 270px;
     overflow: auto;
     z-index: 2;
 
     background-color: #181818;
+    border-radius: 0 0 5px 5px;
 }
 
 ::-webkit-scrollbar{
@@ -217,6 +218,7 @@ textarea:focus{
 
 #bookSearchList::-webkit-scrollbar-track{
     background-color: #181818;
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb{
@@ -238,8 +240,8 @@ textarea:focus{
 }
 
 #bookSearchResultText{
-    width: 300px;
-    height: 60px;
+    padding: 0 0 0 5px;
+    width: 100%;
 }
 
 #bookSearchResultTitle {
@@ -253,10 +255,9 @@ textarea:focus{
 }
 
 #bookSearchResultFrame{
-    margin: auto;
-    
-    width: 80px;
-    height: 80px;
+    display: flex;
+
+    width: 90px;
 }
 
 #bookSearchResultImage {
@@ -292,10 +293,10 @@ textarea:focus{
 
 #closeBtn{
     font-family: 'Material Icons';
-    font-size: 30px;
+    font-size: 18px;
 
-    width: 50px;
-    height: 50px;
+    width: 35px;
+    height: 35px;
 
     border: 0;
     border-radius: 50%;
@@ -332,7 +333,7 @@ textarea:focus{
 }
 
 #newBookBg{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 
@@ -367,7 +368,7 @@ textarea:focus{
     font-family: 'Material Icons';
     font-size: 35px;
 
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 30px;
 
