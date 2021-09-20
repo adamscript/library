@@ -107,6 +107,30 @@ textarea:focus{
 .bookCoverFrame img{
     max-height: 225px;
     max-width: 225px;
+
+    min-width: 128px;
+
+    border-radius: 1.5px;
+}
+
+.bookCoverOverlay{
+    position: absolute;
+    bottom: 3px;
+
+    width: 100%;
+    height: 100%;
+    
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,0.6) 0%, 
+    rgba(255,255,255,0.15) 2%, 
+    rgba(255,255,255,0.1) 4%, rgba(0,0,0,0.15) 5%,
+    rgba(255,255,255,0.15) 7%, 
+    rgba(255,255,255,0) 8%);
+
+    -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 79%);
+    mask-image: linear-gradient(0deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 79%);
+
+    z-index: 1;
 }
 
 .bookCoverStatusFrame{
@@ -120,6 +144,8 @@ textarea:focus{
     height: 15%;
 
     color: rgb(218, 203, 122);
+
+    z-index: 2;
 }
 
 .bookCoverButtonBg{
@@ -281,6 +307,9 @@ textarea:focus{
     max-width: 225px;
     max-height: 225px;
 
+    min-width: 128px;
+    min-height: 128px;
+
     position: absolute;
     right: 0;
 
@@ -294,7 +323,7 @@ textarea:focus{
 }
 
 img{
-    filter: drop-shadow(0 0 0.75rem #050505);
+    filter: drop-shadow(5px 15px 0.65rem rgba(0, 0, 0, 0.45));
 }
 
 .bookCoverStatusFrame{
@@ -317,6 +346,8 @@ img{
 
     color: #212121;
     background-color: rgb(214, 201, 123);
+
+    filter: drop-shadow(5px 10px 0.3rem rgba(0,0,0,0.15));
 }
 
 #newBookBtn:hover{

@@ -59,6 +59,10 @@ function updateBookList(){
         bookCoverFrame.appendChild(bookCover);
         bookCover.src = myLibrary[i].cover;
 
+        const bookCoverOverlay = document.createElement("div");
+        bookCoverOverlay.className = "bookCoverOverlay";
+        bookCoverFrame.appendChild(bookCoverOverlay);
+
         const bookCoverStatusFrame = document.createElement("div");
         bookCoverStatusFrame.className = "bookCoverStatusFrame";
         bookCoverStatusFrame.id = i + "bookStatus"
