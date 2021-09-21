@@ -41,7 +41,7 @@ function addBookToLibrary(){
     document.getElementById('newBookWindow').hidden = true;
     setLibraryItem()
     updateBookList();
-    updateBookListDetail();
+    clearForm();
 }
 
 function updateBookList(){
@@ -95,30 +95,31 @@ function updateBookList(){
 
         const bookStatus = document.createElement("button");
         bookStatus.className = "bookStatus";
-        bookStatus.innerHTML = "bookmark_border";
         bookCoverButton.appendChild(bookStatus);
         bookStatus.addEventListener('mousedown', () => {
             if(myLibrary[i].read){
                 myLibrary[i].read = false;
-
-                document.getElementById(i + "bookStatus").hidden = true;
                 setLibraryItem();
                 updateBookList();
                 updateBookListDetail(i);
-
-                console.log(i + "bookStatus false")
             }
             else{
                 myLibrary[i].read = true;
-
-                document.getElementById(i + "bookStatus").hidden = false;
                 setLibraryItem()
                 updateBookList();
                 updateBookListDetail(i);
-
-                console.log(i + "bookStatus true")
             }
         });
+
+        //Read button icon functionality
+        if(myLibrary[i].read){
+            bookCoverStatusFrame.hidden = false;
+            bookStatus.innerHTML = "bookmark";
+        }
+        else{
+            bookCoverStatusFrame.hidden = true;
+            bookStatus.innerHTML = "bookmark_border";
+        }
 
         const bookCoverButtonBg = document.createElement("div");
         bookCoverButtonBg.className = "bookCoverButtonBg";
@@ -152,6 +153,19 @@ function updateBookListDetail(selectedBook){
     const bookDiv = document.createElement("div");
     bookDiv.id = "bookDiv"
     document.getElementById("bookListDetail").appendChild(bookDiv);
+
+    const bookStatusText = document.createElement("p");
+    bookStatusText.className = "bookStatusText";
+    bookDiv.appendChild(bookStatusText);
+    bookStatusText.innerHTML = "This book has been read";
+
+    //Read status detail functionality
+    if(myLibrary[selectedBook].read){
+        bookStatusText.hidden = false;
+    }
+    else{
+        bookStatusText.hidden = true;
+    }
 
     const bookTitle = document.createElement("p");
     bookTitle.className = "bookListDetailTitle";
@@ -249,8 +263,6 @@ function trimStr(string, length){
         trimmedString = string.substring(0, length);
     }
 
-    console.log(trimmedString.length);
-
     return trimmedString;
 }
 
@@ -313,8 +325,6 @@ function searchBook(){
             bookSearchResultImage.id = "bookSearchResultImage";
             bookSearchResultFrame.appendChild(bookSearchResultImage);
             bookSearchResultImage.src = response.items[i].volumeInfo.imageLinks.thumbnail;
-
-            console.log(response.items[i].volumeInfo.imageLinks.thumbnail);
         
             document.getElementById('loadingFade').hidden = true;
             showSearchBook();
@@ -327,6 +337,19 @@ function searchBook(){
     });
 }
 
+function clearForm(){
+    document.getElementById('ftitle').value = '';
+    document.getElementById('fauthor').value = '';
+    document.getElementById('fpublished').value = '';
+    document.getElementById('fpublisher').value = '';
+    document.getElementById('flanguage').value = '';
+    document.getElementById('fcategories').value = '';
+    document.getElementById('fpages').value = '';
+    document.getElementById('fdescription').value = '';
+    document.getElementById('fisbn').value = '';
+    document.getElementById('fcover').value = '';
+}
+
 function showSearchBook(){
     document.getElementById("bookSearchList").hidden = false;
 }
@@ -337,7 +360,6 @@ function hideSearchBook(){
 
 function updateCover(){
     document.getElementById('coverimg').src = document.getElementById('fcover').value;
-    console.log("cover updated!");
 }
 
 function showNewBook(){
