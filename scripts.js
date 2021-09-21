@@ -53,6 +53,7 @@ function updateBookList(){
     for (let i = 0; i < myLibrary.length; i++){
         const bookCoverFrame = document.createElement("div");
         bookCoverFrame.className = "bookCoverFrame";
+        bookCoverFrame.id = i + "bookCoverFrame"
         document.getElementById("bookList").appendChild(bookCoverFrame);
         
         const bookCover = document.createElement("img");
@@ -85,7 +86,8 @@ function updateBookList(){
         bookCoverButton.appendChild(bookDelete);
         bookDelete.addEventListener("click", () => {
             myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
-            document.getElementById('bookListDetail').hidden = true;
+            document.getElementById('bookListDetail').style.opacity = 0;
+            document.getElementById("bookListDetail").style.zIndex = 0;
             setLibraryItem()
             updateBookList();
             updateBookListDetail();
@@ -124,12 +126,14 @@ function updateBookList(){
 
         bookCoverFrame.addEventListener("mouseover", () => {
             updateBookListDetail(i);
-            document.getElementById("bookListDetail").hidden = false;
+            document.getElementById("bookListDetail").style.opacity = 1;
+            document.getElementById("bookListDetail").style.zIndex = 2;
             bookCoverButtonFrame.hidden = false;
         });
 
         bookCoverFrame.addEventListener("mouseout", () => {
-            document.getElementById("bookListDetail").hidden = true;
+            document.getElementById("bookListDetail").style.opacity = 0;
+            document.getElementById("bookListDetail").style.zIndex = 0;
             bookCoverButtonFrame.hidden = true;
         });
     }   
@@ -146,7 +150,7 @@ function updateBookListDetail(selectedBook){
 
     //Draw book list
     const bookDiv = document.createElement("div");
-    bookDiv.className = "bookDiv"
+    bookDiv.id = "bookDiv"
     document.getElementById("bookListDetail").appendChild(bookDiv);
 
     const bookTitle = document.createElement("p");
@@ -192,7 +196,23 @@ function updateBookListDetail(selectedBook){
     const bookISBN = document.createElement("p");
     bookISBN.className = "bookListDetails";
     bookDiv.appendChild(bookISBN);
-    bookISBN.innerHTML = "ISBN : " + myLibrary[selectedBook].isbn; 
+    bookISBN.innerHTML = "ISBN : " + myLibrary[selectedBook].isbn;
+    
+    //Set book detail frame position
+    const bookListDetail = document.getElementById("bookListDetail")
+    
+    bookListDetail.style.top = (document.getElementById(selectedBook + 'bookCoverFrame').getBoundingClientRect().top + window.scrollY) + "px";
+    bookListDetail.style.left = document.getElementById(selectedBook + 'bookCoverFrame').getBoundingClientRect().right + 15 + "px";
+
+    //Make sure book detail frame never go off screen
+    if(bookListDetail.getBoundingClientRect().right > window.innerWidth){
+        bookListDetail.style.left = document.getElementById(selectedBook + 'bookCoverFrame').getBoundingClientRect().left - bookListDetail.getBoundingClientRect().width - 15 + "px";
+    }
+
+    if(bookListDetail.getBoundingClientRect().bottom > window.innerHeight){
+        bookListDetail.style.top = document.getElementById(selectedBook + 'bookCoverFrame').getBoundingClientRect().top - ((bookListDetail.getBoundingClientRect().bottom - window.innerHeight) + (window.innerHeight - document.getElementById(selectedBook + 'bookCoverFrame').getBoundingClientRect().bottom)) + "px";
+    }
+
 }
 
 //Generate UUID for book identification
@@ -289,7 +309,7 @@ function searchBook(){
         
             showSearchBook();
         }
-    });
+    })
 }
 
 function showSearchBook(){
@@ -313,11 +333,11 @@ function hideNewBook(){
     document.getElementById('newBookWindow').hidden = true;
 }
 
-window.addEventListener("mousemove", function(e){
+/*window.addEventListener("mousemove", function(e){
     let bookListDetail = document.getElementById('bookListDetail');
     bookListDetail.style.left = (e.pageX + 15) + "px";
     bookListDetail.style.top = (e.pageY + 15) + "px";
-});
+});*/
 
 getLibraryItem();
 updateBookList();

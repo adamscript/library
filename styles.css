@@ -13,6 +13,8 @@ input{
 
     border: white;
     border-radius: 5px;
+
+    padding: 0 0 0 10px;
 }
 
 input:focus{
@@ -74,7 +76,8 @@ textarea:focus{
     border: 1px solid rgba(170, 170, 170, 0.1);
     border-radius: 5px;
 
-    z-index: 1;
+    user-select: none;
+    z-index: 0;
 }
 
 .bookListDetailTitle{
@@ -95,7 +98,7 @@ textarea:focus{
     color:rgb(225, 225, 225);
 }
 
-.bookDiv{
+#bookDiv{
     margin: 15px;
 }
 
@@ -210,6 +213,10 @@ textarea:focus{
 
     background-color: #181818;
     border-radius: 0 0 5px 5px;
+
+    padding: 5px;
+
+    font-size: small;
 }
 
 ::-webkit-scrollbar{
