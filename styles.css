@@ -4,6 +4,46 @@ html{
     font-family: 'Roboto', sans-serif;
 }
 
+h1{
+    font-family: 'Scheherazade New', serif;
+    font-size: 36px;
+    text-align: center;
+    
+    margin: auto;
+
+    user-select: none;
+}
+
+#socials{
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    margin: 30px;
+}
+
+#socials img{
+    height: 24px;
+    opacity: 0.6;
+}
+
+#socials img:hover{
+    height: 24px;
+    opacity: 0.8;
+}
+
+#githubLogo{
+    filter: invert();
+}
+
+#linkedinLogo{
+    filter: brightness(10);
+}
+
 input{
     color: #ffffff;
     background-color: #303030;
@@ -188,7 +228,7 @@ textarea:focus{
     font-family: 'Material Icons';
     font-size: 30px;
 
-    color: #d3d3d3;
+    color: #aaaaaa;
     background: 0;
     border: 0;
 }
@@ -197,7 +237,7 @@ textarea:focus{
     font-family: 'Material Icons';
     font-size: 30px;
 
-    color: #aaaaaa;
+    color: #d3d3d3;
     background: 0;
     border: 0;
 }
@@ -206,7 +246,7 @@ textarea:focus{
     font-family: 'Material Icons';
     font-size: 30px;
 
-    color: #d3d3d3;
+    color: #aaaaaa;
     background: 0;
     border: 0;
 }
