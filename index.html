@@ -16,11 +16,14 @@
             <div id="newBookFrame">
                 <div id="newBookPanel">
                     <div id="closeBtnFrame">
-                        <button id="closeBtn" onclick="hideNewBook()">close</button>
+                        <button id="closeBtn" onclick="closeNewBook()">close</button>
                     </div>
                     <div id="newBook">
                         <div id="coverimgprev">
-                            <img id="coverimg">
+                            <img id="coverimg" src="/src/coverphd.png">
+                            <div id="pasteImagePanel" onclick="pasteImageURL()">
+                                <div id="pasteImageIcon">add_photo_alternate</div>
+                            </div>
                         </div>
                         <div id="bookForm">
                             <div id="ftitleframe">
@@ -38,8 +41,8 @@
                             <input type="number" id="fpages" name="fpages" placeholder="Page Count">
                             <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
                             <br>
-                            <input hidden type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
-                            <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="900"></textarea>
+                            <input hidden type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL" value="/src/coverphd.png">
+                            <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="640"></textarea>
                             <br>
                             <button id="addBookBtn" onclick="addBookToLibrary()">Add Book</button>
                         </div>

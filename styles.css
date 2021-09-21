@@ -398,17 +398,44 @@ textarea:focus{
 }
 
 #coverimg {
-
     max-width: 150px;
 
     min-width: 120px;
     min-height: 120px;
 }
 
-#coverimgprev {
-    margin: 30px 15px 0 30px;
+#pasteImagePanel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    width: 150px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0,0,0,0.9);
+    opacity: 0;
+}
+
+#pasteImagePanel:hover{
+    opacity: 1;
+}
+
+#pasteImageIcon{
+    font-family: 'Material Icons';
+    font-size: 60px;
+
+    color: rgb(218, 203, 122);
+
+    user-select: none;
+}
+
+#coverimgprev {
+    display: flex;
+
+    position: relative;
+
+    margin: 30px 15px auto 30px;
 }
 
 .bookCoverStatusFrame{

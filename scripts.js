@@ -85,12 +85,14 @@ function updateBookList(){
         bookDelete.innerHTML = "delete";
         bookCoverButton.appendChild(bookDelete);
         bookDelete.addEventListener("click", () => {
-            myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
-            document.getElementById('bookListDetail').style.opacity = 0;
-            document.getElementById("bookListDetail").style.zIndex = 0;
-            setLibraryItem()
-            updateBookList();
-            updateBookListDetail();
+            if(confirm('Are you sure you want to delete "' + myLibrary[i].title + '" from your library?')){
+                myLibrary.splice(myLibrary.findIndex(x => x.id == myLibrary[i].id), 1);
+                document.getElementById('bookListDetail').style.opacity = 0;
+                document.getElementById("bookListDetail").style.zIndex = 0;
+                setLibraryItem()
+                updateBookList();
+                updateBookListDetail();
+            }
         })   
 
         const bookStatus = document.createElement("button");
@@ -295,7 +297,7 @@ function searchBook(){
                 document.getElementById('flanguage').value = isoToEnglish(response.items[i].volumeInfo.language);
                 document.getElementById('fcategories').value = response.items[i].volumeInfo.categories;
                 document.getElementById('fpages').value = response.items[i].volumeInfo.pageCount;
-                document.getElementById('fdescription').value = trimStr(response.items[i].volumeInfo.description, 900);
+                document.getElementById('fdescription').value = trimStr(response.items[i].volumeInfo.description, 640);
                 document.getElementById('fisbn').value = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
                 document.getElementById('fcover').value = response.items[i].volumeInfo.imageLinks.thumbnail;
                 updateCover();
@@ -347,7 +349,33 @@ function clearForm(){
     document.getElementById('fpages').value = '';
     document.getElementById('fdescription').value = '';
     document.getElementById('fisbn').value = '';
-    document.getElementById('fcover').value = '';
+    document.getElementById('fcover').value = '/src/coverphd.png';
+    document.getElementById('coverimg').src = '/src/coverphd.png';
+}
+
+function pasteImageURL(){
+    let imageURL = prompt("Paste book cover image URL here :")
+
+    if(imageURL == null || imageURL == ""){
+        if(document.getElementById('fcover').value == '/src/coverphd.png' || 
+            document.getElementById('coverimg').src == '/src/coverphd.png'){
+                return;
+        }
+        else{
+            if(confirm('Do you want to remove current book cover?')){
+                document.getElementById('fcover').value = '/src/coverphd.png';
+                document.getElementById('coverimg').src = '/src/coverphd.png';
+            }
+            else{
+                return;
+            }
+        }
+        
+    }
+    else{
+        document.getElementById('fcover').value = imageURL;
+        document.getElementById('coverimg').src = imageURL;
+    }
 }
 
 function showSearchBook(){
@@ -368,6 +396,30 @@ function showNewBook(){
 
 function hideNewBook(){
     document.getElementById('newBookWindow').hidden = true;
+}
+
+function closeNewBook(){
+    if(document.getElementById('ftitle').value != '' ||
+        document.getElementById('fauthor').value != ''||
+        document.getElementById('fpublished').value != ''||
+        document.getElementById('fpublisher').value != ''||
+        document.getElementById('flanguage').value != ''||
+        document.getElementById('fcategories').value != ''||
+        document.getElementById('fpages').value != ''||
+        document.getElementById('fdescription').value != ''||
+        document.getElementById('fisbn').value != ''||
+        document.getElementById('coverimg').src == '/src/coverphd.png'){
+            if(confirm('Keep changes?')){
+                hideNewBook();
+            }
+            else{
+                clearForm();
+                hideNewBook();
+            }
+    }
+    else{
+        hideNewBook();
+    }
 }
 
 document.getElementById("ftitle").addEventListener("keydown", (e) => {
