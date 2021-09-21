@@ -212,6 +212,28 @@ function uuid() {
      return uuid;  
 }
 
+//Convert ISO 631-1 to proper english name
+function isoToEnglish(code){
+    return langCodes[langCodes.findIndex(x => x.alpha2 === code)].English;
+}
+
+//Trim string to specified length
+function trimStr(string, length){
+    let charCount = string.length;
+    let trimmedString;
+
+    if(charCount>length){
+        trimmedString = string.substring(0, length - 3) + "..."
+    }
+    else{
+        trimmedString = string.substring(0, length);
+    }
+
+    console.log(trimmedString.length);
+
+    return trimmedString;
+}
+
 function searchBook(){
     fetch("https://www.googleapis.com/books/v1/volumes?q={" + document.getElementById('ftitle').value, {mode: 'cors'})
     .then(function(response){
@@ -232,10 +254,10 @@ function searchBook(){
                 document.getElementById('fauthor').value = response.items[i].volumeInfo.authors;
                 document.getElementById('fpublished').value = response.items[i].volumeInfo.publishedDate;
                 document.getElementById('fpublisher').value = response.items[i].volumeInfo.publisher;
-                document.getElementById('flanguage').value = response.items[i].volumeInfo.language;
+                document.getElementById('flanguage').value = isoToEnglish(response.items[i].volumeInfo.language);
                 document.getElementById('fcategories').value = response.items[i].volumeInfo.categories;
                 document.getElementById('fpages').value = response.items[i].volumeInfo.pageCount;
-                document.getElementById('fdescription').value = response.items[i].volumeInfo.description;
+                document.getElementById('fdescription').value = trimStr(response.items[i].volumeInfo.description, 900);
                 document.getElementById('fisbn').value = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
                 document.getElementById('fcover').value = response.items[i].volumeInfo.imageLinks.thumbnail
                 updateCover();
@@ -264,6 +286,8 @@ function searchBook(){
             bookSearchResultAuthor.id = "bookSearchResultAuthor"
             bookSearchResultText.appendChild(bookSearchResultAuthor);
             bookSearchResultAuthor.innerHTML = response.items[i].volumeInfo.authors;
+        
+            showSearchBook();
         }
     });
 }

@@ -23,7 +23,7 @@
                             <img id="coverimg">
                         </div>
                         <div id="bookForm">
-                            <input type="text" id="ftitle" name="ftitle" placeholder="Title" onchange="searchBook()" oninput="searchBook()" onfocus="showSearchBook()" onblur="hideSearchBook()" autocomplete="off">
+                            <input type="text" id="ftitle" name="ftitle" placeholder="Title" oninput="hideSearchBook()" onchange="searchBook()" onblur="hideSearchBook()" autocomplete="off">
                             <div id="bookSearchList" hidden></div>
                             <br>
                             <input type="text" id="fauthor" name="fauthor" placeholder="Author">
@@ -34,8 +34,8 @@
                             <input type="number" id="fpages" name="fpages" placeholder="Page Count">
                             <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
                             <br>
-                            <input type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
-                            <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="500"></textarea>
+                            <input hidden type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL">
+                            <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="900"></textarea>
                             <br>
                             <button id="addBookBtn" onclick="addBookToLibrary()">Add Book</button>
                         </div>
@@ -50,3 +50,4 @@
     </body>
 </html>
 <script src="scripts.js"></script>
+<script src="src/language-codes_json.js"></script>
