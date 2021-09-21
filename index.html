@@ -23,8 +23,12 @@
                             <img id="coverimg">
                         </div>
                         <div id="bookForm">
-                            <input type="text" id="ftitle" name="ftitle" placeholder="Title" oninput="hideSearchBook()" onchange="searchBook()" onblur="hideSearchBook()" autocomplete="off">
-                            <div id="bookSearchList" hidden></div>
+                            <div id="ftitleframe">
+                                <input type="text" id="ftitle" name="ftitle" placeholder="Title" oninput="hideSearchBook()" onblur="hideSearchBook()" autocomplete="off">
+                                <div id="searchIcon">search</div>
+                                <div id="bookSearchList" hidden></div>
+                                <div id="loadingFade" hidden></div>
+                            </div>
                             <br>
                             <input type="text" id="fauthor" name="fauthor" placeholder="Author">
                             <input type="text" id="fpublished" name="fpublished" placeholder="Published">

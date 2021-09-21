@@ -14,7 +14,7 @@ input{
     border: white;
     border-radius: 5px;
 
-    padding: 0 0 0 10px;
+    padding: 0 0 0 5px;
 }
 
 input:focus{
@@ -68,7 +68,7 @@ textarea:focus{
     position: absolute;
 
     width: 360px;
-    max-height: 540px;
+    max-height: 600px;
 
     backdrop-filter: blur(10px);
     background-color: rgba(18, 18, 18, 0.9);
@@ -204,10 +204,11 @@ textarea:focus{
 
 #bookSearchList{
     position: absolute;
-    top: 135px;
+    top: 27px;
 
-    width: 300px;
-    max-height: 270px;
+    width: 290px;
+    min-height: 5px;
+    max-height: 240px;
     overflow: auto;
     z-index: 2;
 
@@ -217,6 +218,38 @@ textarea:focus{
     padding: 5px;
 
     font-size: small;
+}
+
+#loadingFade {
+    background: linear-gradient(90deg, rgba(24,24,24,1) 0%, rgba(24,24,24,1) 25%, rgba(61,61,61,1) 50%, rgba(24,24,24,1) 75%, rgba(24,24,24,1) 100%);
+    background-size: 500% 500%;
+
+    -webkit-animation: loadingFade 3s ease infinite;
+    -moz-animation: loadingFade 3s ease infinite;
+    animation: loadingFade 3s ease infinite;
+
+    position: absolute;
+    top: 27px;
+
+    width: 300px;
+    height: 15px;
+    
+    z-index: 3;
+
+    border-radius: 0 0 5px 5px;
+}
+
+@-webkit-keyframes loadingFade {
+    0%{background-position:100% 0%}
+    100%{background-position:0% 100%}
+}
+@-moz-keyframes loadingFade {
+    0%{background-position:100% 0%}
+    100%{background-position:0% 100%}
+}
+@keyframes loadingFade {
+    0%{background-position:100% 0%}
+    100%{background-position:0% 100%}
 }
 
 ::-webkit-scrollbar{
@@ -322,12 +355,14 @@ textarea:focus{
 }
 
 #newBookWindow{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     
     width: 100%;
     height: 100%;
+
+    z-index: 4;
 }
 
 #newBookPanel{
@@ -389,6 +424,8 @@ textarea:focus{
     background-color: rgb(214, 201, 123);
 
     filter: drop-shadow(0 0 0.5rem rgba(0,0,0,0.5));
+
+    z-index: 3;
 }
 
 #newBookBtn:hover{
@@ -403,4 +440,32 @@ textarea:focus{
 #fdescription::-webkit-scrollbar-track{
     background-color: #303030;
     border-radius: 5px;
+}
+
+#searchIcon{
+    font-family: 'Material Icons';
+    font-size: 24px;
+    text-align: right;
+
+    position: absolute;
+    right: 0px;
+
+    color: #303030;
+
+    padding: 3px;
+
+    user-select: none;
+}
+
+#ftitleframe{
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+}
+
+#ftitle{
+    width: 100%;
+
+    padding: 0 30px 0 5px;
 }
