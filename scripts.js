@@ -189,7 +189,6 @@ function updateBookListDetail(selectedBook){
     getLibraryItem()
 
     //Clear book list DOM
-
     while (document.querySelector('#bookListDetail').firstChild){
         document.querySelector('#bookListDetail').removeChild(document.querySelector('#bookListDetail').firstChild)
     }
@@ -311,6 +310,16 @@ function trimStr(string, length){
     return trimmedString;
 }
 
+//Check if an object property's value is null or not
+function checkNull(value){
+    if(value == null || value == ''){
+        return '';
+    }
+    else{
+        return value;
+    }
+}
+
 function searchBook(){
     //Show loading indicator
     hideSearchBook();
@@ -327,59 +336,72 @@ function searchBook(){
         }
         
         for(let i = 0; i < 10; i++){
-            const bookSearchResult = document.createElement("div");
-            bookSearchResult.className = "bookSearchResult";
-            document.getElementById("bookSearchList").appendChild(bookSearchResult);
-            
-            //Added values from API to form
-            bookSearchResult.addEventListener("mousedown", () => {
-                document.getElementById('ftitle').value = response.items[i].volumeInfo.title;
-                document.getElementById('fauthor').value = response.items[i].volumeInfo.authors;
-                document.getElementById('fpublished').value = response.items[i].volumeInfo.publishedDate;
-                document.getElementById('fpublisher').value = response.items[i].volumeInfo.publisher;
-                document.getElementById('flanguage').value = isoToEnglish(response.items[i].volumeInfo.language);
-                document.getElementById('fcategories').value = response.items[i].volumeInfo.categories;
-                document.getElementById('fpages').value = response.items[i].volumeInfo.pageCount;
-                document.getElementById('fdescription').value = trimStr(response.items[i].volumeInfo.description, 640);
-                document.getElementById('fisbn').value = response.items[i].volumeInfo.industryIdentifiers[0].identifier;
-                document.getElementById('fcover').value = response.items[i].volumeInfo.imageLinks.thumbnail;
-                updateCover();
-                hideSearchBook();
-            })
 
-            //Show lists of search results
-            const bookSearchResultFrame = document.createElement("div");
-            bookSearchResultFrame.id = "bookSearchResultFrame";
-            bookSearchResult.appendChild(bookSearchResultFrame);
+            //Check if an object has properties for title, authors, isbn, and cover img
+            if(!('title' in response.items[i].volumeInfo)||
+            !('authors' in response.items[i].volumeInfo)||
+            !('imageLinks' in response.items[i].volumeInfo)||
+            !('industryIdentifiers' in response.items[i].volumeInfo)){
+                return;
+            }
+            else{
+                const bookSearchResult = document.createElement("div");
+                bookSearchResult.className = "bookSearchResult";
+                document.getElementById("bookSearchList").appendChild(bookSearchResult);
+                
+                //Added values from API to form
+                bookSearchResult.addEventListener("mousedown", () => {
+                    document.getElementById('ftitle').value = checkNull(response.items[i].volumeInfo.title);
+                    document.getElementById('fauthor').value = checkNull(response.items[i].volumeInfo.authors);
+                    document.getElementById('fpublished').value = checkNull(response.items[i].volumeInfo.publishedDate);
+                    document.getElementById('fpublisher').value = checkNull(response.items[i].volumeInfo.publisher);
+                    document.getElementById('flanguage').value = checkNull(isoToEnglish(response.items[i].volumeInfo.language));
+                    document.getElementById('fcategories').value = checkNull(response.items[i].volumeInfo.categories);
+                    document.getElementById('fpages').value = checkNull(response.items[i].volumeInfo.pageCount);
+                    document.getElementById('fdescription').value = trimStr(checkNull(response.items[i].volumeInfo.description, 640));
+                    document.getElementById('fisbn').value = checkNull(response.items[i].volumeInfo.industryIdentifiers[0].identifier);
+                    document.getElementById('fcover').value = checkNull(response.items[i].volumeInfo.imageLinks.thumbnail);
+                
+                    updateCover();
+                    hideSearchBook();
+                })
 
-            const bookSearchResultText = document.createElement("div");
-            bookSearchResultText.id = "bookSearchResultText";
-            bookSearchResult.appendChild(bookSearchResultText);
+                //Show lists of search results
+                const bookSearchResultFrame = document.createElement("div");
+                bookSearchResultFrame.className = "bookSearchResultFrame";
+                bookSearchResult.appendChild(bookSearchResultFrame);
 
-            const bookSearchResultTitle = document.createElement("p");
-            bookSearchResultTitle.id = "bookSearchResultTitle";
-            bookSearchResultText.appendChild(bookSearchResultTitle);
-            bookSearchResultTitle.innerHTML = response.items[i].volumeInfo.title;
+                const bookSearchResultText = document.createElement("div");
+                bookSearchResultText.className = "bookSearchResultText";
+                bookSearchResult.appendChild(bookSearchResultText);
 
-            const bookSearchResultAuthor = document.createElement("p");
-            bookSearchResultAuthor.id = "bookSearchResultAuthor";
-            bookSearchResultText.appendChild(bookSearchResultAuthor);
-            bookSearchResultAuthor.innerHTML = response.items[i].volumeInfo.authors;
+                const bookSearchResultTitle = document.createElement("p");
+                bookSearchResultTitle.className = "bookSearchResultTitle";
+                bookSearchResultText.appendChild(bookSearchResultTitle);
+                bookSearchResultTitle.innerHTML = checkNull(response.items[i].volumeInfo.title);
 
-            const bookSearchResultImage = document.createElement("img");
-            bookSearchResultImage.id = "bookSearchResultImage";
-            bookSearchResultFrame.appendChild(bookSearchResultImage);
-            bookSearchResultImage.src = response.items[i].volumeInfo.imageLinks.thumbnail;
-        
-            document.getElementById('loadingFade').hidden = true;
-            showSearchBook();
+                const bookSearchResultAuthor = document.createElement("p");
+                bookSearchResultAuthor.className = "bookSearchResultAuthor";
+                bookSearchResultText.appendChild(bookSearchResultAuthor);
+                bookSearchResultAuthor.innerHTML = checkNull(response.items[i].volumeInfo.authors);
+
+                const bookSearchResultImage = document.createElement("img");
+                bookSearchResultImage.className = "bookSearchResultImage";
+                bookSearchResultFrame.appendChild(bookSearchResultImage);
+                bookSearchResultImage.src = checkNull(response.items[i].volumeInfo.imageLinks.thumbnail);
+                }
+
+        document.getElementById('loadingFade').hidden = true;
+        showSearchBook();
+
         }
     })
-    /*.catch((error) => {
+    .catch((error) => {
         document.getElementById("bookSearchList").innerHTML = "Failed to retrieve data from Google Books API. Try again later";
         document.getElementById('loadingFade').hidden = true;
         showSearchBook();
-    })*/;
+        console.error(error)
+    });
 }
 
 function clearForm(){
@@ -427,6 +449,7 @@ function showSearchBook(){
 
 function hideSearchBook(){
     document.getElementById("bookSearchList").hidden = true;
+    document.getElementById("loadingFade").hidden = true;
 }
 
 function updateCover(){
@@ -451,7 +474,7 @@ function closeNewBook(){
         document.getElementById('fpages').value != ''||
         document.getElementById('fdescription').value != ''||
         document.getElementById('fisbn').value != ''||
-        document.getElementById('coverimg').src == '/src/coverphd.png'){
+        document.getElementById('fcover').value !== '/src/coverphd.png'){
             if(confirm('Keep changes?')){
                 hideNewBook();
             }

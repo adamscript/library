@@ -177,9 +177,9 @@ textarea:focus{
 
 .bookCoverFrame img{
     max-height: 225px;
-    max-width: 225px;
+    max-width: 150px;
 
-    min-width: 128px;
+    /*min-width: 128px;*/
 
     border-radius: 1.5px;
 
@@ -188,7 +188,7 @@ textarea:focus{
 
 .bookCoverOverlay{
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
 
     width: 100%;
     height: 100%;
@@ -349,28 +349,28 @@ textarea:focus{
     background-color: #3d3d3d;
 }
 
-#bookSearchResultText{
+.bookSearchResultText{
     padding: 0 0 0 5px;
     width: 100%;
 }
 
-#bookSearchResultTitle {
+.bookSearchResultTitle {
     color: white;
     font-size: small;
     font-weight: bold;
 }
 
-#bookSearchResultAuthor {
+.bookSearchResultAuthor {
     font-size: smaller;
 }
 
-#bookSearchResultFrame{
+.bookSearchResultFrame{
     display: flex;
 
     width: 90px;
 }
 
-#bookSearchResultImage {
+.bookSearchResultImage {
     max-width: 60px;
     max-height: 60px;
 
