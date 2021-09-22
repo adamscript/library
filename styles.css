@@ -179,8 +179,6 @@ textarea:focus{
     max-height: 225px;
     max-width: 150px;
 
-    /*min-width: 128px;*/
-
     border-radius: 1.5px;
 
     filter: drop-shadow(5px 15px 0.65rem rgba(0, 0, 0, 0.45));
@@ -200,8 +198,8 @@ textarea:focus{
     rgba(255,255,255,0.15) 7%, 
     rgba(255,255,255,0) 8%);
 
-    -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 79%);
-    mask-image: linear-gradient(0deg, rgba(0,0,0,0.25) 0%, rgba(0,0,0,1) 79%);
+    -webkit-mask-image: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,1) 79%);
+    mask-image: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,1) 79%);
 
     z-index: 1;
 }
@@ -225,7 +223,7 @@ textarea:focus{
 
 .bookCoverButtonBg{
     position: absolute;
-    bottom: 3px;
+    bottom: 0;
 
     width: 100%;
     height: 50%;
