@@ -358,10 +358,10 @@ function searchBook(){
                     document.getElementById('flanguage').value = checkNull(isoToEnglish(response.items[i].volumeInfo.language));
                     document.getElementById('fcategories').value = checkNull(response.items[i].volumeInfo.categories);
                     document.getElementById('fpages').value = checkNull(response.items[i].volumeInfo.pageCount);
-                    document.getElementById('fdescription').value = trimStr(checkNull(response.items[i].volumeInfo.description, 640));
+                    document.getElementById('fdescription').value = checkNull(trimStr(response.items[i].volumeInfo.description, 640));
                     document.getElementById('fisbn').value = checkNull(response.items[i].volumeInfo.industryIdentifiers[0].identifier);
                     document.getElementById('fcover').value = checkNull(response.items[i].volumeInfo.imageLinks.thumbnail);
-                
+
                     updateCover();
                     hideSearchBook();
                 })
@@ -414,22 +414,22 @@ function clearForm(){
     document.getElementById('fpages').value = '';
     document.getElementById('fdescription').value = '';
     document.getElementById('fisbn').value = '';
-    document.getElementById('fcover').value = '/src/coverphd.png';
-    document.getElementById('coverimg').src = '/src/coverphd.png';
+    document.getElementById('fcover').value = 'src/coverphd.png';
+    document.getElementById('coverimg').src = 'src/coverphd.png';
 }
 
 function pasteImageURL(){
     let imageURL = prompt("Paste book cover image URL here :")
 
     if(imageURL == null || imageURL == ""){
-        if(document.getElementById('fcover').value == '/src/coverphd.png' || 
-            document.getElementById('coverimg').src == '/src/coverphd.png'){
+        if(document.getElementById('fcover').value == 'src/coverphd.png' || 
+            document.getElementById('coverimg').src == 'src/coverphd.png'){
                 return;
         }
         else{
             if(confirm('Do you want to remove current book cover?')){
-                document.getElementById('fcover').value = '/src/coverphd.png';
-                document.getElementById('coverimg').src = '/src/coverphd.png';
+                document.getElementById('fcover').value = 'src/coverphd.png';
+                document.getElementById('coverimg').src = 'src/coverphd.png';
             }
             else{
                 return;
@@ -474,7 +474,7 @@ function closeNewBook(){
         document.getElementById('fpages').value != ''||
         document.getElementById('fdescription').value != ''||
         document.getElementById('fisbn').value != ''||
-        document.getElementById('fcover').value !== '/src/coverphd.png'){
+        document.getElementById('fcover').value !== 'src/coverphd.png'){
             if(confirm('Keep changes?')){
                 hideNewBook();
             }
@@ -489,7 +489,7 @@ function closeNewBook(){
 }
 
 document.getElementById("ftitle").addEventListener("keydown", (e) => {
-    if(e.code === "Enter"){
+    if(e.key === 'Enter'){
         searchBook();
     }
 })
