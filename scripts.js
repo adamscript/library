@@ -1,12 +1,55 @@
-let myLibrary = [];
+//Initializing the objects so the app won't look empty like this feeling
+let myLibrary = [{author: "J. M. Barlog",
+                categories: "Fiction",
+                cover: "https://i.weltbild.de/p/god-of-war-titan-books-274993668.jpg?v=1&wp=p5",
+                description: "The novelization of the highly anticipated God of War game. His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse gods and monsters. It is in this harsh, unforgiving world that he must fight to survive... and teach his son to do the same. This startling reimagining of God of War deconstructs the core elements that defined the series--satisfying combat; breathtaking scale; and a powerful narrative--and fuses them anew.",
+                id: "562e64a7-8a93-4270-8733-f765e4c14df8",
+                isbn: "1789094917",
+                language: "English",
+                pages: "352",
+                published: "2020-08-25",
+                publisher: "Titan Books",
+                read: true,
+                title: "God of War - The Official Novelization"},
 
-function setLibraryItem(){
-    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-}
+                {author: "J.R.R. Tolkien",
+                categories: "Young Adult Fiction",
+                cover: "https://images.foyles.co.uk/xlarge/books/img/0/2/6/9780261103344.jpg",
+                description: "A great modern classic and the prelude to The Lord of the Rings. Bilbo Baggins is a hobbit who enjoys a comfortable, unambitious life, rarely traveling any farther than his pantry or cellar. But his contentment is disturbed when the wizard Gandalf and a company of dwarves arrive on his doorstep one day to whisk him away on an adventure. They have launched a plot to raid the treasure hoard guarded by Smaug the Magnificent, a large and very dangerous dragon. Bilbo reluctantly joins their quest, unaware that on his journey to the Lonely Mountain he will encounter both a magic ring and a frightening creature known as Gollum. “A glori...",
+                id: "f0573d66-b26c-4491-aa57-986e09867b7a",
+                isbn: "9780547951973",
+                language: "English",
+                pages: "288",
+                published: "2012-02-15",
+                publisher: "Houghton Mifflin Harcourt",
+                read: true,
+                title: "The Hobbit"}, 
 
-function getLibraryItem(){
-    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
-}
+                {author: "Chris Allcock",
+                categories: "Fiction",
+                cover: "https://images-na.ssl-images-amazon.com/images/I/81H+RN7gRoL.jpg",
+                description: "Dive into a world of pirates, plunder, and peril with this novel based on Rare’s thrilling adventure game, Sea of Thieves. Long ago, at the height of the Golden Age of Piracy, the infamous pirate Ramsey and his shipmates sacrificed everything to embark on an impossible journey into the Sea of Thieves. In the present day, Larinna, an ambitious stowaway determined to leave her mark on history, joins forces with a wild and adventurous captain seeking the greatest treasure ever buried. Separated by time but united by their drive to uncover the secrets of the Sea of Thieves, both crews will face tricks, traps, and malevolent horrors u...",
+                id: "db1e32b0-c2be-4824-8650-3b407413a25d",
+                isbn: "9781683834878",
+                language: "English",
+                pages: "264",
+                published: "2018-10-23",
+                publisher: "Insight Editions",
+                read: false,
+                title: "Sea of Thieves: Athena's Fortune"}, 
+
+                {author: "Shad M. Brooks",
+                categories: "Fiction",
+                cover: "https://m.media-amazon.com/images/I/51GYWlG-FML.jpg",
+                description: "Who better to fight back the darkness of the world than the one responsible for most of it? Daylen, once known as the Great Bastard, the Scourge of Nations, Dayless the Conqueror, has lived in hiding since his presumed death. Burdened by age and tremendous guilt, he thinks his life is coming to an end. Unbeknownst to him he's about to embark on a journey towards redemption where his ruthless abilities might save the world. Many battles await with friends to be made and a past filled with countless crimes to confront, all the while trying to keep his true identity a secret. Indeed, it might be too much if not for the fabled power ...",
+                id: "1ccd961b-2f25-4b8d-aab8-8794bf3e13ed",
+                isbn: "0648572927",
+                language: "English",
+                pages: "504",
+                published: "2019-07",
+                publisher: "Chronicles of Everfall",
+                read: false,
+                title: "Shadow of the Conqueror"}];
 
 function Book(id, title, author, published, publisher, language, categories, pages, description, isbn, cover, read){
     this.id = id;
@@ -332,11 +375,11 @@ function searchBook(){
             showSearchBook();
         }
     })
-    .catch((error) => {
+    /*.catch((error) => {
         document.getElementById("bookSearchList").innerHTML = "Failed to retrieve data from Google Books API. Try again later";
         document.getElementById('loadingFade').hidden = true;
         showSearchBook();
-    });
+    })*/;
 }
 
 function clearForm(){
@@ -427,6 +470,19 @@ document.getElementById("ftitle").addEventListener("keydown", (e) => {
         searchBook();
     }
 })
+
+//Setup localStorage functionality to save books
+function setLibraryItem(){
+    localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
+function getLibraryItem(){
+    myLibrary = JSON.parse(localStorage.getItem("myLibrary"));
+}
+
+if(!localStorage.getItem('myLibrary')){
+    setLibraryItem();
+}
 
 getLibraryItem();
 updateBookList();

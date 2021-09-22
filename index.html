@@ -14,51 +14,57 @@
         </style>
     </head>
     <body>
-        <h1>Library</h1>
+        <div id="header">
+            <h1>Library</h1>
+        </div>
         <div id="socials">
             <a href="https://github.com/awwwan/"><img id="githubLogo" src="src/GitHub-Mark-32px.png"></a>
             <a href="https://www.linkedin.com/in/adamdarmawan-awwwan/"><img id="linkedinLogo" src="src/LI-In-Bug.png"></a>
         </div>
         <div id="newBookWindow" hidden>
-            <div id="newBookFrame">
-                <div id="newBookPanel">
-                    <div id="closeBtnFrame">
-                        <button id="closeBtn" onclick="closeNewBook()">close</button>
-                    </div>
-                    <div id="newBook">
-                        <div id="coverimgprev">
-                            <img id="coverimg" src="/src/coverphd.png">
-                            <div id="pasteImagePanel" onclick="pasteImageURL()">
-                                <div id="pasteImageIcon">add_photo_alternate</div>
-                            </div>
+            <div id="newBookContainer">
+                <div id="newBookFrame">
+                    <div id="newBookPanel">
+                        <div id="closeBtnFrame">
+                            <button id="closeBtn" onclick="closeNewBook()">close</button>
                         </div>
-                        <div id="bookForm">
-                            <div id="ftitleframe">
-                                <input type="text" id="ftitle" name="ftitle" placeholder="Title" oninput="hideSearchBook()" onblur="hideSearchBook()" autocomplete="off">
-                                <div id="searchIcon">search</div>
-                                <div id="bookSearchList" hidden></div>
-                                <div id="loadingFade" hidden></div>
+                        <div id="newBook">
+                            <div id="coverimgprev">
+                                <img id="coverimg" src="/src/coverphd.png">
+                                <div id="pasteImagePanel" onclick="pasteImageURL()">
+                                    <div id="pasteImageIcon">add_photo_alternate</div>
+                                </div>
                             </div>
-                            <br>
-                            <input type="text" id="fauthor" name="fauthor" placeholder="Author">
-                            <input type="text" id="fpublished" name="fpublished" placeholder="Published">
-                            <input type="text" id="fpublisher" name="fpublisher" placeholder="Publisher">
-                            <input type="text" id="flanguage" name="flanguage" placeholder="Language">
-                            <input type="text" id="fcategories" name="fcategories" placeholder="Categories">
-                            <input type="number" id="fpages" name="fpages" placeholder="Page Count">
-                            <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
-                            <br>
-                            <input hidden type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL" value="/src/coverphd.png">
-                            <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="640"></textarea>
-                            <br>
-                            <button id="addBookBtn" onclick="addBookToLibrary()">Add Book</button>
+                            <div id="bookForm">
+                                <div id="ftitleframe">
+                                    <input type="text" id="ftitle" name="ftitle" placeholder="Title" oninput="hideSearchBook()" onblur="hideSearchBook()" autocomplete="off">
+                                    <div id="searchIcon">search</div>
+                                    <div id="bookSearchList" hidden></div>
+                                    <div id="loadingFade" hidden></div>
+                                </div>
+                                <br>
+                                <input type="text" id="fauthor" name="fauthor" placeholder="Author">
+                                <input type="text" id="fpublished" name="fpublished" placeholder="Published">
+                                <input type="text" id="fpublisher" name="fpublisher" placeholder="Publisher">
+                                <input type="text" id="flanguage" name="flanguage" placeholder="Language">
+                                <input type="text" id="fcategories" name="fcategories" placeholder="Categories">
+                                <input type="number" id="fpages" name="fpages" placeholder="Page Count">
+                                <input type="text" id="fisbn" name="fisbn" placeholder="ISBN">
+                                <br>
+                                <input hidden type="text" id="fcover" name="fcover" onchange="updateCover()" placeholder="Cover image URL" value="/src/coverphd.png">
+                                <textarea id="fdescription" name="fdescription" placeholder="Description" rows="6" maxlength="640"></textarea>
+                                <br>
+                                <button id="addBookBtn" onclick="addBookToLibrary()">Add Book</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <div id="newBookBg" onclick="hideNewBook()"></div>
             </div>
-            <div id="newBookBg" onclick="hideNewBook()"></div>
         </div>
-        <div id="bookList"></div>
+        <div id="bookListContainer">
+            <div id="bookList"></div>
+        </div>
         <div id="bookListDetail"></div>
         <button id="newBookBtn" onclick="showNewBook()">add</button>
     </body>

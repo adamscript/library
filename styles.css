@@ -7,11 +7,22 @@ html{
 h1{
     font-family: 'Scheherazade New', serif;
     font-size: 36px;
-    text-align: center;
-    
-    margin: auto;
+
+    margin: 0;
 
     user-select: none;
+}
+
+body{
+    margin: auto;
+}
+
+#header{
+    display: flex;
+    justify-content: center;
+
+    position: absolute;
+    width: 100%;
 }
 
 #socials{
@@ -98,8 +109,18 @@ textarea:focus{
     background-color: rgb(141, 133, 85)
 }
 
+#bookListContainer{
+    position: absolute;
+    margin-top: 72px;
+
+    width: 100%;
+}
+
 #bookList{
     display: grid;
+
+    margin: 0 15px 0 15px;
+
     grid-gap: 30px;
     grid-template-columns: repeat(auto-fit, 150px);
 }
@@ -400,13 +421,19 @@ textarea:focus{
 
 #newBookFrame{
     display: flex;
+}
+
+#newBookContainer{
+    display: flex;
     justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
 }
 
 #newBookWindow{
     position: fixed;
-    top: 0;
-    left: 0;
     
     width: 100%;
     height: 100%;
@@ -418,7 +445,6 @@ textarea:focus{
     background-color: #212121;
     border-radius: 5px;
 
-    margin: 30px;
 
     z-index: 4;
 }
