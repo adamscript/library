@@ -38,18 +38,18 @@ let myLibrary = [{author: "J. M. Barlog",
                 read: false,
                 title: "Sea of Thieves: Athena's Fortune"}, 
 
-                {author: "Shad M. Brooks",
-                categories: "Fiction",
-                cover: "https://m.media-amazon.com/images/I/51GYWlG-FML.jpg",
-                description: "Who better to fight back the darkness of the world than the one responsible for most of it? Daylen, once known as the Great Bastard, the Scourge of Nations, Dayless the Conqueror, has lived in hiding since his presumed death. Burdened by age and tremendous guilt, he thinks his life is coming to an end. Unbeknownst to him he's about to embark on a journey towards redemption where his ruthless abilities might save the world. Many battles await with friends to be made and a past filled with countless crimes to confront, all the while trying to keep his true identity a secret. Indeed, it might be too much if not for the fabled power ...",
-                id: "1ccd961b-2f25-4b8d-aab8-8794bf3e13ed",
-                isbn: "0648572927",
+                {author: "Robert Irwin",
+                categories: "Tales",
+                cover: "https://images-na.ssl-images-amazon.com/images/I/91LQJs1QEeL.jpg",
+                description: "The most significant translation in one hundred years of one of the greatest works of world literature. From Ali Baba and the forty thieves to the voyages of Sinbad, the stories of The Arabian Nights are timeless and unforgettable. Published here in three volumes, this magnificent new edition brings these tales to life for modern readers in the first complete English translation since Richard Burton’s of the 1880s. Every night for three years the vengeful King Shahriyar sleeps with a different virgin, and the next morning puts her to death. To end this brutal pattern, the vizier's daughter, Shahrazad, begins to tell the king ...",
+                id: "aebfc740-32b8-4e6d-91cf-0e290b0c07e3",
+                isbn: "9780140449389",
                 language: "English",
-                pages: "504",
-                published: "2019-07",
-                publisher: "Chronicles of Everfall",
+                pages: "992",
+                published: "2010-10-25",
+                publisher: "Penguin Classics",
                 read: false,
-                title: "Shadow of the Conqueror"}];
+                title: "The Arabian Nights: Tales of 1,001 Nights: Volume 1"}];
 
 function Book(id, title, author, published, publisher, language, categories, pages, description, isbn, cover, read){
     this.id = id;
@@ -325,7 +325,7 @@ function searchBook(){
     hideSearchBook();
     document.getElementById('loadingFade').hidden = false;
 
-    fetch("https://www.googleapis.com/books/v1/volumes?q={" + document.getElementById('ftitle').value + "}", {mode: 'cors'})
+    fetch("https://www.googleapis.com/books/v1/volumes?q={" + document.getElementById('ftitle').value + "}&key=AIzaSyA97PuEC2we5MAsFH4Zn4D6otBYBPGWgUM", {mode: 'cors'})
     .then(function(response){
         return response.json();
     })
