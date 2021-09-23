@@ -11,7 +11,14 @@ All done with HTML, CSS, and Javascript.
 ## Features
 
 ### Add new book (featuring **Google Books API!**)
-![Adding new book]()
+
+
+https://user-images.githubusercontent.com/69242299/134442643-16752dd4-9b51-4b92-a0f8-5eaf3fd9631d.mp4
+
+
 
 ### Book inspection (that never goes off screen!)
-![Inspecting books]()
+
+
+https://user-images.githubusercontent.com/69242299/134442710-467bf8e0-5459-47f9-9885-0e11d5a15a80.mp4
+
