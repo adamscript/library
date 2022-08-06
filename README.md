@@ -1,6 +1,6 @@
 # Library
 
-**Live Demo :** [awwwan.github.io/library](https://awwwan.github.io/library/)
+**Live Demo :** <https://adamscript.github.io/library/>
 
 I made this project to learn about Javascript Object and Constructor.
 
